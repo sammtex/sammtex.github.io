@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adam Davidson — Independent Author &amp; Publisher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #14171c;
+    --ink-soft: #1d222b;
+    --paper: #ece7db;
+    --paper-dim: #b9b3a2;
+    --stamp: #b6412f;
+    --gold: #c9a227;
+    --sage: #6f7f5f;
+    --line: rgba(236,231,219,0.14);
+    --radius: 2px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Public Sans', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--stamp); color:var(--paper); }
+
+  a{ color:inherit; }
+
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- Texture ---------- */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    pointer-events:none;
+    opacity:0.05;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.4) 2px, rgba(255,255,255,0.4) 3px);
+    z-index:1;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:20;
+    background:rgba(20,23,28,0.88);
+    backdrop-filter: blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  header .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .brand{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:19px;
+    letter-spacing:0.01em;
+  }
+  .brand span{ color:var(--gold); }
+  nav ul{
+    display:flex; gap:28px; list-style:none;
+  }
+  nav a{
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.09em;
+    text-decoration:none;
+    color:var(--paper-dim);
+    transition:color .2s ease;
+  }
+  nav a:hover, nav a:focus-visible{ color:var(--gold); }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:120px 0 100px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+  }
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--stamp);
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:28px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:26px; height:1px;
+    background:var(--stamp);
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:clamp(44px, 7vw, 86px);
+    line-height:0.98;
+    letter-spacing:-0.01em;
+    max-width:14ch;
+  }
+  h1 em{
+    font-style:italic;
+    font-weight:300;
+    color:var(--paper-dim);
+  }
+  .hero-sub{
+    margin-top:28px;
+    max-width:52ch;
+    font-size:18px;
+    color:var(--paper-dim);
+  }
+  .hero-meta{
+    margin-top:56px;
+    display:flex;
+    gap:48px;
+    flex-wrap:wrap;
+    font-family:'Space Mono', monospace;
+    font-size:12.5px;
+    color:var(--paper-dim);
+  }
+  .hero-meta div span{
+    display:block;
+    color:var(--paper);
+    font-size:14px;
+    margin-top:6px;
+  }
+
+  /* ---------- Section shared ---------- */
+  section{ padding:88px 0; border-bottom:1px solid var(--line); }
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:24px;
+    margin-bottom:52px;
+    flex-wrap:wrap;
+  }
+  .section-num{
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    color:var(--stamp);
+    letter-spacing:0.1em;
+  }
+  h2{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(28px, 4vw, 40px);
+    margin-top:6px;
+  }
+
+  /* ---------- About ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap:64px;
+  }
+  .about-grid p{
+    font-size:16.5px;
+    color:var(--paper-dim);
+    max-width:56ch;
+  }
+  .about-grid p + p{ margin-top:18px; }
+  .stat-block{
+    border-left:1px solid var(--line);
+    padding-left:28px;
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+  }
+  .stat{
+    display:flex; flex-direction:column;
+  }
+  .stat b{
+    font-family:'Fraunces', serif;
+    font-size:30px;
+    font-weight:600;
+    color:var(--gold);
+  }
+  .stat small{
+    font-size:12.5px;
+    color:var(--paper-dim);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    margin-top:4px;
+  }
+
+  /* ---------- Catalog (signature element) ---------- */
+  .catalog{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+  }
+  .card{
+    background:var(--ink-soft);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:26px 24px 22px;
+    position:relative;
+    min-height:230px;
+    display:flex;
+    flex-direction:column;
+    transition:transform .25s ease, border-color .25s ease;
+  }
+  .card::before{
+    content:"";
+    position:absolute;
+    top:0; right:0;
+    width:0; height:0;
+    border-style:solid;
+    border-width:0 22px 22px 0;
+    border-color:transparent var(--ink) transparent transparent;
+  }
+  .card:hover{
+    transform:translateY(-4px);
+    border-color:var(--gold);
+  }
+  .card .catalog-no{
+    font-family:'Space Mono', monospace;
+    font-size:11.5px;
+    color:var(--stamp);
+    letter-spacing:0.06em;
+  }
+  .card h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:22px;
+    margin-top:14px;
+    line-height:1.2;
+  }
+  .card p{
+    margin-top:12px;
+    font-size:14px;
+    color:var(--paper-dim);
+    flex-grow:1;
+  }
+  .card .status{
+    margin-top:16px;
+    display:inline-flex;
+    align-self:flex-start;
+    align-items:center;
+    gap:7px;
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    padding:5px 10px;
+    border:1px solid var(--line);
+    border-radius:20px;
+    color:var(--paper-dim);
+  }
+  .status.live{ color:var(--sage); border-color:var(--sage); }
+  .status.progress{ color:var(--gold); border-color:var(--gold); }
+  .status i{
+    width:6px; height:6px; border-radius:50%;
+    background:currentColor;
+    display:inline-block;
+  }
+
+  /* ---------- Services ---------- */
+  .services{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .service{
+    background:var(--ink);
+    padding:32px 30px;
+  }
+  .service .n{
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    color:var(--stamp);
+  }
+  .service h3{
+    font-family:'Fraunces', serif;
+    font-size:21px;
+    font-weight:600;
+    margin-top:10px;
+  }
+  .service p{
+    margin-top:10px;
+    font-size:14.5px;
+    color:var(--paper-dim);
+  }
+
+  /* ---------- Contact ---------- */
+  .contact{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:32px;
+    border-bottom:none;
+  }
+  .contact h2{ max-width:14ch; }
+  .contact-links{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .contact-links a{
+    font-family:'Fraunces', serif;
+    font-size:20px;
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+    padding-bottom:4px;
+    transition:border-color .2s ease, color .2s ease;
+    width:fit-content;
+  }
+  .contact-links a:hover, .contact-links a:focus-visible{
+    color:var(--gold);
+    border-color:var(--gold);
+  }
+
+  footer{
+    padding:32px 0 48px;
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    color:var(--paper-dim);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:820px){
+    .about-grid{ grid-template-columns:1fr; gap:36px; }
+    .stat-block{
+      flex-direction:row;
+      border-left:none;
+      border-top:1px solid var(--line);
+      padding-left:0; padding-top:24px;
+      flex-wrap:wrap;
+    }
+    .catalog{ grid-template-columns:1fr; }
+    .services{ grid-template-columns:1fr; }
+    nav ul{ display:none; }
+    .hero{ padding:88px 0 64px; }
+    section{ padding:64px 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .card{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand">Adam <span>Davidson</span></div>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#catalog">Catalog</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Independent Publishing House · Est. 2026</div>
+    <h1>Books made<br><em>with care,</em><br>self&#8209;published.</h1>
+    <p class="hero-sub">
+      Adam Davidson is an independent author and self-publisher working across
+      non-fiction guides, puzzle collections, and illustrated activity books —
+      designed, typeset, and released one title at a time.
+    </p>
+    <div class="hero-meta">
+      <div>Based in<span>Algeria</span></div>
+      <div>Platform<span>Amazon KDP</span></div>
+      <div>Focus<span>Guides · Puzzles · Coloring Books</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-num">01 — About</div>
+        <h2>Independent, hands-on publishing.</h2>
+      </div>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>
+          Adam Davidson writes and designs books for a niche readership rather
+          than a mass market — practical guides for people building their own
+          income online, and quiet, screen-free activity books for readers who
+          want to slow down.
+        </p>
+        <p>
+          Every title is planned, written, laid out, and published independently,
+          from first outline to a finished, print-ready interior and cover. New
+          titles are added to the catalog on an ongoing basis.
+        </p>
+      </div>
+      <div class="stat-block">
+        <div class="stat">
+          <b>KDP</b>
+          <small>Publishing platform</small>
+        </div>
+        <div class="stat">
+          <b>3</b>
+          <small>Titles in the catalog</small>
+        </div>
+        <div class="stat">
+          <b>Solo</b>
+          <small>Writing, design &amp; layout</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="catalog">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-num">02 — Catalog</div>
+        <h2>Published &amp; forthcoming titles.</h2>
+      </div>
+    </div>
+    <div class="catalog">
+      <div class="card">
+        <div class="catalog-no">No. 001</div>
+        <h3>AI Tools for Freelancers</h3>
+        <p>A practical guide to using AI tools to find work, speed up delivery, and grow a freelance business.</p>
+        <div class="status live"><i></i>Published</div>
+      </div>
+      <div class="card">
+        <div class="catalog-no">No. 002</div>
+        <h3>The 150-Puzzle Collection</h3>
+        <p>A mixed activity book of word search, sudoku, and crossword puzzles, print-ready for paperback.</p>
+        <div class="status progress"><i></i>In production</div>
+      </div>
+      <div class="card">
+        <div class="catalog-no">No. 003</div>
+        <h3>Nature Mandalas</h3>
+        <p>A coloring book of nature-inspired mandala line art, designed for relaxed, screen-free coloring.</p>
+        <div class="status progress"><i></i>In production</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-num">03 — Services</div>
+        <h2>What Adam Davidson does.</h2>
+      </div>
+    </div>
+    <div class="services">
+      <div class="service">
+        <div class="n">A</div>
+        <h3>Non-fiction guide writing</h3>
+        <p>Researching, writing, and structuring practical how-to guides for a self-publishing audience.</p>
+      </div>
+      <div class="service">
+        <div class="n">B</div>
+        <h3>Puzzle &amp; activity book design</h3>
+        <p>Building print-ready puzzle interiors — word search, sudoku, and crossword — from concept to layout.</p>
+      </div>
+      <div class="service">
+        <div class="n">C</div>
+        <h3>Coloring book illustration</h3>
+        <p>Producing and refining line-art illustrations for themed coloring books, ready for print.</p>
+      </div>
+      <div class="service">
+        <div class="n">D</div>
+        <h3>Cover design &amp; formatting</h3>
+        <p>Designing wraparound covers and formatting interiors to meet Amazon KDP's print specifications.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div>
+    <div class="section-head" style="margin-bottom:0;">
+      <div>
+        <div class="section-num">04 — Contact</div>
+        <h2>Get in touch.</h2>
+      </div>
+    </div>
+  </div>
+  <div class="contact-links">
+    <a href="https://www.amazon.com/author/saidbaha">Amazon Author Page →</a>
+    <a href="mailto:saidlaidbaid09@gmail.com">saidlaidbaid09@gmail.com →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:12px;">
+    <div>© 2026 Adam Davidson. All rights reserved.</div>
+    <div>Independent Author &amp; Publisher</div>
+  </div>
+</footer>
+
+</body>
+</html>
